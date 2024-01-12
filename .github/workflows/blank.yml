@@ -21,5 +21,8 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Configure Terraform
-        run: terraform init
+        run: |
+          echo ${{ secrets.GCP_CREDENTIALS }} > gcp-credentials.json
+          terraform init -backend-config="backend.tfvars" \            
+            -backend-config="credentials=gcp-credentials.json"
           
