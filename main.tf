@@ -5,8 +5,7 @@ provider "google" {
 }
 
 terraform {
-  backend "gcs" {
-    credentials = var.gcp_credentials
+  backend "gcs" {    
     bucket  = "mon_bucket_for_terraform"
     prefix  = "MonBackend"
   }
