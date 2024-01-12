@@ -27,7 +27,7 @@ jobs:
 
           # Generates an execution plan for Terraform
       - name: Terraform Plan
-        run: terraform plan -input=false
+        run: terraform plan -input=false -var="db_password=votre_mot_de_passe"
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
           
