@@ -1,7 +1,7 @@
 provider "google" {
-  credentials = jsondecode(var.gcp_credentials)
+  credentials = file("gcp-credentials.json")
   project     = "zinc-strategy-393412"
-  region      = "us-central1"  # Vous pouvez changer la région selon votre préférence
+  region      = "us-central1"
 }
 
 terraform {
@@ -10,6 +10,7 @@ terraform {
     prefix  = "MonBackend"
   }
 }
+
 
 variable "db_password" {
   description = "Mot de passe pour la base de données MySQL"
