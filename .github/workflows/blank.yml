@@ -1,0 +1,27 @@
+name: Terraform Apply
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    env:
+      GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+      # Ajoutez d'autres variables d'environnement GCP au besoin
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Configure Terraform
+        run: |
+          echo ${{ secrets.GCP_CREDENTIALS }} | base64 -d > gcp-credentials.json
+          terraform init -backend-config="credentials=${GCP_CREDENTIALS}"
+          
