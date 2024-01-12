@@ -1,5 +1,5 @@
 provider "google" {
-  credentials =  var.gcp_credentials
+  credentials =  file("gcp-credentials.json")
   project     = "zinc-strategy-393412"
   region      = "us-central1"
 }
