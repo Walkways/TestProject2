@@ -27,5 +27,5 @@ jobs:
 
           # Generates an execution plan for Terraform
       - name: Terraform Plan
-        run: terraform plan -var="db_password=monmotdepasse"
+        run: terraform apply -var="db_password=monmotdepasse"
 
