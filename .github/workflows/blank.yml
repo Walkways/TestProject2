@@ -20,14 +20,16 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
 
-      - name: Terraform Init
-        run: terraform init
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+      #- name: Terraform Init
+      #  run: terraform init
+      #  env:
+      #    GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
           # Generates an execution plan for Terraform
       - name: Terraform Plan
-        run: terraform plan -var="db_password=monmotdepasse" -var="gcp_credentials=${{ secrets.GCP_CREDENTIALS }}"
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        run: |
+          echo '${{ secrets.GCP_CREDENTIALS }}' > gcp-credentials.json
+          terraform init -backend-config="backend.tfvars" \
+            -var="gcp_credentials=gcp-credentials.json"
+          terraform plan
 
