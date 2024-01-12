@@ -1,12 +1,12 @@
 provider "google" {
-  credentials = file("/credentials.json")
+  credentials = jsondecode(var.gcp_credentials)
   project     = "zinc-strategy-393412"
   region      = "us-central1"  # Vous pouvez changer la région selon votre préférence
 }
 
 terraform {
   backend "gcs" {
-    credentials = "credentials.json"
+    credentials = var.gcp_credentials
     bucket  = "mon_bucket_for_terraform"
     prefix  = "MonBackend"
   }
