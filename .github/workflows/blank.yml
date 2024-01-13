@@ -46,9 +46,13 @@ jobs:
 
 
       - name: Terraform Output
-        run: terraform output
+        run: export DATABASE_IP=$(terraform output)
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Use IP in further steps
+        run: |
+          echo "IP Address GOOD: $DATABASE_IP"
 
           
 
