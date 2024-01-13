@@ -99,7 +99,7 @@ jobs:
       - name: Try
         run: |
           output=$(terraform output database_ip)
-          echo $output
+          #echo $output
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
