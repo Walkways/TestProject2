@@ -46,13 +46,15 @@ jobs:
 
 
       - name: Terraform Output
-        run: export DATABASE_IP=$(terraform output)
+        run: echo "::set-output name=ip_address::$(terraform output | jq -r '.ip_address')
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
-      - name: Use IP in further steps
+      - name: Use IP Address
         run: |
-          echo "IP Address GOOD: " $DATABASE_IP
+          extracted_ip="${{ steps.extract_ip.outputs.ip_address }}"
+          echo "Extracted IP Address: $extracted_ip"
+          # Utilisez extracted_ip dans d'autres commandes ou scripts.
 
           
 
