@@ -65,6 +65,9 @@ jobs:
       - name: Use la Variable d'Environnement        
         run: echo $CUSTOM_VAR # OK
 
+
+
+
       - name: Get Terraform Output First        
         run: output_value=$(terraform output database_ip)      
         env:
@@ -78,11 +81,8 @@ jobs:
         
       - name: Get Terraform Output
         id: terraform_output
-        run: |          
-          output_value=$(terraform output database_ip)
-          echo "DATABASE_IP=$output_value" >> $GITHUB_ENV
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        run: echo "DATABASE_IP=$output_value" >> $GITHUB_ENV
+
         
 
       - name: Use Output in Further Steps
