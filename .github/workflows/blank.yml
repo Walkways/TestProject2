@@ -34,7 +34,7 @@ jobs:
       - name: Terraform Apply      
         run: |
           terraform apply -auto-approve -input=false -var="db_password=votre_mot_de_passe"
-          output_value=$(terraform output)
+          output_value=$(terraform output -json "database_ip")
           echo "OUTPUT_VALUE=$output_value" >> $GITHUB_ENV
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
