@@ -65,6 +65,14 @@ jobs:
       - name: Use la Variable d'Environnement        
         run: echo $CUSTOM_VAR # OK
 
+      - name: Get Terraform Output First        
+        run: output_value=$(terraform output database_ip)      
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+
+
+
+
 
 
         
