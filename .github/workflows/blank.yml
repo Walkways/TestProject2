@@ -84,12 +84,7 @@ jobs:
 
 
 
-      - name: Get and Use Terraform Output        
-        run: |
-          export GOOGLE_CREDENTIALS="${{ secrets.GCP_CREDENTIALS }}"
-          terraform init
-          terraform apply -auto-approve
-          echo "DATABASE_IP=$(terraform output -json database_ip)" >> $GITHUB_ENV
+
         
 
         
