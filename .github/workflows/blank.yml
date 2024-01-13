@@ -46,7 +46,7 @@ jobs:
 
 
       - name: Terraform Output
-        run: terraform output -json
+        run: terraform output
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
