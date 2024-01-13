@@ -69,31 +69,8 @@ jobs:
 
 
 
-
-      - name: Get Terraform Output First
-        id: terraform_output
-        run: echo "::set-output name=database_ip::$(terraform output database_ip)"      
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-          
-
-      - name: Use Output in Further Steps
-        run: |
-          output_value=${{ needs.terraform_output.outputs.database_ip }}
-          echo "DATABASE_IP=$output_value" >> $GITHUB_ENV
-
-
-
-
         
 
-        
-
-
-      - name: Continue with Further Steps
-        run: |
-          output_value=${{ env.DATABASE_IP }}
-          echo "Continuing with DATABASE_IP=$output_value"
 
           
       - name: Try
