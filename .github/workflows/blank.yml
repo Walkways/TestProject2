@@ -46,7 +46,7 @@ jobs:
 
 
       - name: Terraform Output
-        run: export DATABASE_IP=$(terraform output -json database_instance_ip | jq -r '.ip_address')
+        run: terraform output -json
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
