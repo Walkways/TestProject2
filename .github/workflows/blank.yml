@@ -69,9 +69,7 @@ jobs:
 
         
       - name: Terraform SET IP !      
-        run: |          
-          output_value=$(terraform output -json "database_ip")
-          echo "OUTPUT_VALUE=$output_value" >> $GITHUB_ENV
+        run: output_value=$(terraform output -json "database_ip")          
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
       
