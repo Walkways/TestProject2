@@ -56,6 +56,15 @@ jobs:
           echo "Extracted IP Address: $extracted_ip"
           # Utilisez extracted_ip dans d'autres commandes ou scripts.
 
+
+      - name: Set Environment Variable
+        run: echo "MA_VARIABLE=ma_valeur" >> $GITHUB_ENV
+
+      - name: Afficher la Variable d'Environnement
+        run: echo  $GITHUB_ENV
+        
+
+
           
 
           
