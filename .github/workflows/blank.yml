@@ -32,18 +32,9 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: Terraform Apply      
-        run: |
-          terraform apply -auto-approve -input=false -var="db_password=votre_mot_de_passe"
-          output_value=$(terraform output -json "database_ip")
-          echo "OUTPUT_VALUE=$output_value" >> $GITHUB_ENV
+        run: terraform apply -auto-approve -input=false -var="db_password=votre_mot_de_passe"          
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-
-      - name: Use Output in Further Steps
-        run: |
-          echo "The Terraform output value is !!!: $OUTPUT_VALUE"
-          # Utilisez OUTPUT_VALUE dans d'autres commandes ou scripts.
-
 
       - name: Install jq
         run: |
@@ -76,15 +67,18 @@ jobs:
 
 
 
-
-      - name: EXP la Variable d'Environnement TERRAFORM
-        run: |
-          output_value=$(terraform output)
-          echo "OUTPUT_VALUE=$output_value" >> $GITHUB_ENV
         
-
+      - name: Terraform SET IP !      
+        run: |          
+          output_value=$(terraform output -json "database_ip")
+          echo "OUTPUT_VALUE=$output_value" >> $GITHUB_ENV
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
       
-          
+      - name: Use Output in Further Steps
+        run: |
+          echo "The Terraform output value is !!!: $OUTPUT_VALUE"
+          # Utilisez OUTPUT_VALUE dans d'autres commandes ou scripts.
         
 
 
