@@ -72,7 +72,7 @@ jobs:
 
 
       - name: EXP la Variable d'Environnement TERRAFORM
-        run: echo "CUSTOM_VAR2=$(terraform output)" >> $GITHUB_ENV       
+        run: echo "CUSTOM_VAR2={{ $(terraform output) }}" >> $GITHUB_ENV       
 
       - name: Use la Variable d'Environnement TERRAFORM        
         run: echo $CUSTOM_VAR2 # OK
