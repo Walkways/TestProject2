@@ -52,7 +52,7 @@ jobs:
 
       - name: Use IP in further steps
         run: |
-          echo "IP Address GOOD: $DATABASE_IP"
+          echo "IP Address GOOD: " $DATABASE_IP
 
           
 
