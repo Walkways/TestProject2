@@ -60,8 +60,13 @@ jobs:
       - name: Set Environment Variable
         run: echo "MA_VARIABLE=ma_valeur" >> $GITHUB_ENV
 
-      - name: Afficher la Variable d'Environnement
-        run: echo  $GITHUB_ENV
+
+
+      - name: EXP la Variable d'Environnement
+        run: echo "CUSTOM_VAR=IT WORKS" >> $GITHUB_ENV       
+
+      - name: Use la Variable d'Environnement        
+        run: echo $CUSTOM_VAR # OK
         
 
 
