@@ -35,6 +35,15 @@ jobs:
         run: terraform apply -auto-approve -input=false -var="db_password=votre_mot_de_passe"
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+
+
+
+
+      - name: Install jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install jq
+
           
           
 
