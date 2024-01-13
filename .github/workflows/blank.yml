@@ -75,8 +75,7 @@ jobs:
         run: |
           output_value=$(terraform output)
           echo "OUTPUT_VALUE=$output_value" >> $GITHUB_ENV
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        
 
       
           
