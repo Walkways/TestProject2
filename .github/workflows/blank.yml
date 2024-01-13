@@ -46,7 +46,7 @@ jobs:
 
 
       - name: Terraform Output
-        run: echo "::set-output name=ip_address::$(terraform output | jq -r '.ip_address')
+        run: echo "::set-output name=ip_address::$(terraform output)
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
