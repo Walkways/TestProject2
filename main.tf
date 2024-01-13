@@ -27,8 +27,12 @@ resource "google_sql_database_instance" "mansours" {
 
     ip_configuration {
       ipv4_enabled    = true
-      private_network = "0.0.0.0/0"
-    } 
+      authorized_networks {
+        name  = "allow-all"
+        value = "0.0.0.0/0"
+      }
+    }
+
 
   }
   
