@@ -82,8 +82,11 @@ jobs:
 
 
 
-      - name: Get and Use Terraform Output  
-        run: GOOGLE_CREDENTIALS="${{ secrets.GCP_CREDENTIALS }}" echo "DATABASE_IP=$(terraform output database_ip)" >> $GITHUB_ENV    
+      - name: Get and Use Terraform Output
+        run: |
+          GOOGLE_CREDENTIALS="${{ secrets.GCP_CREDENTIALS }}"
+          export GOOGLE_CREDENTIALS  # Exportez la variable pour qu'elle soit disponible pour les commandes suivantes
+          echo "DATABASE_IP=$(terraform output -json database_ip)" >> $GITHUB_ENV
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
