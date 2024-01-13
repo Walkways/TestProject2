@@ -103,7 +103,8 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
-
+      - name: Final Print Variable
+        run:  $output
 
         
 
