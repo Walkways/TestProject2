@@ -50,7 +50,7 @@ resource "google_sql_user" "mansour" {
 }
 
 output "database_ip" {
-  value = google_sql_database_instance.mansours.ip_address
+  value = google_sql_database_instance.mansours.ip_address[0].ip_address
 }
 
 
