@@ -23,7 +23,13 @@ resource "google_sql_database_instance" "mansours" {
   region           = "us-central1"
   deletion_protection = "false"
   settings {
-    tier = "db-f1-micro"    
+    tier = "db-f1-micro"   
+
+    ip_configuration {
+      ipv4_enabled    = true
+      private_network = "0.0.0.0/0"
+    } 
+
   }
   
 }
