@@ -74,16 +74,24 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
           
-  use_output:
-    needs: terraform
-    runs-on: ubuntu-latest
 
-    steps:
-    - name: Use Output in Further Steps
-      run: |
-        output_value=${{ needs.terraform_output.outputs.database_ip }}
-        echo "DATABASE_IP=$output_value" >> $GITHUB_ENV
+      - name: Use Output in Further Steps
+        run: |
+          output_value=${{ needs.terraform_output.outputs.database_ip }}
+          echo "DATABASE_IP=$output_value" >> $GITHUB_ENV
 
+
+
+      - name: Get and Use Terraform Output  
+        run: echo "DATABASE_IP=$(terraform output -json database_ip)" >> $GITHUB_ENV    
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+
+
+      - name: Continue with Further Steps
+        run: |
+          output_value=${{ env.DATABASE_IP }}
+          echo "Continuing with DATABASE_IP=$output_value"
 
 
 
