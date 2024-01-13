@@ -19,6 +19,8 @@ jobs:
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
 
       - name: Terraform Init
         run: terraform init
@@ -98,6 +100,11 @@ jobs:
           output_value=${{ env.DATABASE_IP }}
           echo "Continuing with DATABASE_IP=$output_value"
 
+          
+      - name: Try
+        run: |
+          output=$(terraform output database_ip)
+          echo $output
 
 
 
