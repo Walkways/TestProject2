@@ -83,7 +83,7 @@ jobs:
 
 
       - name: Get and Use Terraform Output  
-        run: echo "DATABASE_IP=$(terraform output -json database_ip)" >> $GITHUB_ENV    
+        run: echo "DATABASE_IP=$(terraform output database_ip)" >> $GITHUB_ENV    
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
