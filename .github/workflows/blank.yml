@@ -115,6 +115,8 @@ jobs:
           output=$(terraform output database_ip)
           echo "::set-output name=output::${output}"
           echo "TF_OUTPUT=${output}" >> $GITHUB_ENV
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: Use Exported Variable
         run: echo $TF_OUTPUT
