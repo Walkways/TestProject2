@@ -45,8 +45,10 @@ jobs:
           sudo apt-get install jq
 
 
-      - name: Terraform Apply
+      - name: Terraform Output
         run: terraform output -json database_instance_ip > ip_output.json
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
           
 
