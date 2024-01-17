@@ -49,6 +49,34 @@ resource "google_sql_user" "mansour" {
   password = var.db_password
 }
 
+resource "google_container_cluster" "mon_cluster" {
+  name     = "mon-cluster"
+  location = "us-central1"
+
+  remove_default_node_pool = true
+  initial_node_count       = 1
+
+  node_config {
+    machine_type = "e2-micro"  # Type de machine le moins cher
+    disk_size_gb = 10    
+  } 
+}
+
+resource "google_container_node_pool" "primary_preemptible_nodes" {
+  name       = "my-node-pool"
+  cluster    = google_container_cluster.mon_cluster.id
+  node_count = 1
+
+  node_locations = ["us-central1-a"]  # Spécifiez la ou les zones que vous souhaitez utiliser
+
+  node_config {
+    preemptible  = true
+    machine_type = "e2-micro"    
+  }
+}
+
+
+
 output "database_ip" {
   value = google_sql_database_instance.mansours.ip_address[0].ip_address
 }
