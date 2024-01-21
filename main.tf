@@ -58,10 +58,19 @@ resource "google_container_cluster" "mon_cluster" {
 
   deletion_protection = false
 
+  lifecycle {
+    ignore_changes = [node_config]  # Ignorer les modifications dans le bloc node_config
+  }
+
   node_config {
     machine_type = "e2-micro"  # Type de machine le moins cher
-    disk_size_gb = 10    
+    disk_size_gb = 10   
+
+    metadata = {
+      disable-node-deletion = "true"
+    }
   } 
+
 }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
@@ -79,9 +88,9 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     preemptible  = true
     machine_type = "e2-micro"
 
-metadata = {
-      disable-node-deletion = "true"
-    }
+#metadata = {
+#      disable-node-deletion = "true"
+#    }
 
   }
 }
