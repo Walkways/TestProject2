@@ -106,13 +106,28 @@ jobs:
 
 
 
+      #- name: Setup Google Cloud SDK
+      #  uses: google-github-actions/setup-gcloud@v0
+      #  with:
+      #    version: '318.0.0'
+      #    project_id: ${{ secrets.GCP_PROJECT_ID }}
+      #    service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+      #    export_default_credentials: true
+
+
       - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0
-        with:
-          version: '318.0.0'
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-          export_default_credentials: true
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Authentification GCP
+        run: |
+          #echo "$GCP_SERVICE_ACCOUNT_KEY" > gcp-key.json
+          gcloud auth activate-service-account #--key-file=gcp-key.json
+          gcloud container clusters get-credentials mon-cluster --region=us-central1
+        env:
+          GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_CREDENTIALS }}
+
+
+          
       
       - name: Install gke-gcloud-auth-plugin
         run: |
@@ -124,6 +139,7 @@ jobs:
           kubectl delete configmap mon-app-config || true
           kubectl create configmap mon-app-config --from-literal=BDD_IP=$TF_OUTPUT --from-literal=BDD_MDP=votre_mot_de_passe
           kubectl apply -f deployment.yaml
+          kubectl get services
           
           
 
