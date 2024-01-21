@@ -56,6 +56,8 @@ resource "google_container_cluster" "mon_cluster" {
   remove_default_node_pool = true
   initial_node_count       = 1
 
+  deletion_protection = false
+
   node_config {
     machine_type = "e2-micro"  # Type de machine le moins cher
     disk_size_gb = 10    
