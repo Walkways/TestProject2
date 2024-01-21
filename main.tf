@@ -71,9 +71,9 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 
   node_locations = ["us-central1-a"]  # Spécifiez la ou les zones que vous souhaitez utiliser
 
-  lifecycle {
-    ignore_changes = [node_config]  # Ignorer les modifications dans le bloc node_config
-  }
+  #lifecycle {
+  #  ignore_changes = [node_config]  # Ignorer les modifications dans le bloc node_config
+  #}
 
   node_config {
     preemptible  = true
