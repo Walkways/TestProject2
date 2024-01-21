@@ -100,15 +100,16 @@ jobs:
         
 
       - name: Install Python For GCLOUD
-        run: |
-          sudo apt-get install python2.7
-          export CLOUDSDK_PYTHON="/usr/bin/python2"
+        uses: actions/setup-python@v4
+        with:
+              python-version: '3.9'
 
 
 
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
-        with:          
+        with:
+          version: '318.0.0'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           export_default_credentials: true
