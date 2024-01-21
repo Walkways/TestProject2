@@ -120,8 +120,8 @@ jobs:
 
       - name: Authentification GCP
         run: |
-          echo "$GCP_SERVICE_ACCOUNT_KEY" > gcp-key.json
-          gcloud auth activate-service-account --key-file=gcp-key.json
+          #echo "$GCP_SERVICE_ACCOUNT_KEY" > gcp-key.json
+          #gcloud auth activate-service-account --key-file=gcp-key.json
           gcloud container clusters get-credentials mon-cluster --region=us-central1
         env:
           GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_CREDENTIALS }}
