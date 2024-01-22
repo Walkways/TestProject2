@@ -119,18 +119,18 @@ jobs:
       - name: Set up Google Cloud CLI authentication
         uses: google-github-actions/auth@v1
         with:
-          credentials: ${{ secrets.GCP_CREDENTIALS }}
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
 
 
 
-      - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-          export_default_credentials: true
+      #- name: Setup Google Cloud SDK
+      #  uses: google-github-actions/setup-gcloud@v1
+      #  with:
+      #    project_id: ${{ secrets.GCP_PROJECT_ID }}
+      #    service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+      #    export_default_credentials: true
 
 
       - name: Install gke-gcloud-auth-plugin
