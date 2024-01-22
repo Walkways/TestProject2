@@ -103,10 +103,9 @@ jobs:
       - name: Set Output Variable BIIIIIIS
         id: set_output2
         run: |
-          output=$(terraform output -json database_ip)
-          bdd_ip=$(echo "${output}" | jq -r '.value.BDD_IP')
-          echo "::set-output name=output::${bdd_ip}"
-          echo "TF_OUTPUT=${bdd_ip}" >> $GITHUB_ENV
+          output=$(terraform output database_ip)
+          (echo "::set-output name=output::${bdd_ip}" | jq -r '.value.bdd_ip')          
+          echo "BDD_IP=${bdd_ip}" >> $GITHUB_ENV
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
