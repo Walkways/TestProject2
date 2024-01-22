@@ -89,7 +89,7 @@ jobs:
       - name: Set Output Variable
         id: set_output
         run: |
-          output=$(terraform output database_ip)
+          output=$(terraform output -raw database_ip)
           echo "::set-output name=output::${output}"
           echo "TF_OUTPUT=${output}" >> $GITHUB_ENV
         env:
@@ -98,21 +98,7 @@ jobs:
       - name: Use Exported Variable
         run: echo $TF_OUTPUT
         
-    #Test Jq
-    # Assume que votre sortie Terraform est stockée dans une variable d'environnement
-      - name: Set Output Variable BIIIIIIS
-        id: set_output2
-        run: |
-          output=$(terraform output database_ip)
-          (echo "::set-output name=output::${bdd_ip}" | jq -r '.value.bdd_ip')          
-          echo "BDD_IP=${bdd_ip}" >> $GITHUB_ENV
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-
-
-      - name: Print BDD_IP without quotes
-        run: echo "BDD_IP=$BDD_IP"
-
+   
 
 
 
